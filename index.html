@@ -2,7 +2,7 @@
 <html lang="es"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
-<title>Indie Café</title>
+<title>Cielo Azul</title>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Red+Hat+Display:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 
@@ -172,6 +172,7 @@ section.dk{--card:color-mix(in srgb,var(--s) 9%,var(--d))}
 .wg{text-align:center}.wb{justify-content:center}
 html{overflow-x:hidden}body{overflow-x:clip}
 img,svg,video,model-viewer{max-width:100%}.pt .lg{flex-wrap:wrap}
+a[rel="ar"]{position:relative;overflow:hidden}
 </style>
 
 </head>
@@ -261,7 +262,7 @@ const AR_MODELS = {plato:"data:model/gltf-binary;base64,Z2xURgIAAADwQQAA5AcAAEpT
           ],
           "arOn": true,
           "desc": "Torta con base de galletas molidas, crema de queso y dulce de leche coronada con frambuesas bañadas en chocolate blanco y semiamargo.",
-          "ar": "modelos/Franui.usdz",
+          "usdz": "modelos/Franui.usdz",
           "glb": "modelos/Franui.glb"
         },
         {
@@ -1139,7 +1140,7 @@ function render(){
   [["--fs",b.fs],["--h1",b.h1],["--th",b.th],["--mw",b.mw],["--ls",b.ls],["--rd",b.rd],["--fsi",b.fsi],["--fsd",b.fsd],["--fsp",b.fsp]].forEach(([k,v]) => v ? st.setProperty(k, v + "px") : st.removeProperty(k));
   st.setProperty("--tt", b.upper === false ? "none" : "uppercase"); st.setProperty("--lr", b.logoShape === "square" ? "14px" : "50%");
   const bi = (b.images || []).filter(Boolean), bn = b.cover || "", lg = b.logo ? `<img src="${esc(b.logo)}" alt="Logo de ${esc(b.name)}">` : esc((b.name || "M").trim().charAt(0).toUpperCase()), mp = /^https?:\/\//i.test((i.mapsUrl || "").trim()) ? i.mapsUrl.trim() : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(i.address || b.name || ""), ig = i.instagram ? `<a class="wbtn o" href="https://instagram.com/${esc(i.instagram)}" target="_blank" rel="noopener">@${esc(i.instagram)}</a>` : "";
-  $("#hd").innerHTML = `<div class="bn"${bn ? ` style="background-image:url('${esc(bn)}')"` : ""}></div><div class="hi"><div class="logo">${lg}</div><div class="hx"><h1>${esc(b.name)}</h1><p>${esc(b.tagline)}</p></div></div>${(b.desc || "").trim() ? `<p class="dsc">${esc(b.desc.trim())}</p>` : ""}${bi.length ? `<div class="hg">${bi.map(u => `<img src="${esc(u)}" alt="${esc(b.name)}" loading="lazy">`).join("")}</div>` : ""}${b.arOn === false ? "" : `<div class="arn">◎ ${esc(b.arNotice ?? "Tocá cualquier producto para verlo sobre tu mesa con realidad aumentada")}</div>`}${i.address || i.mapsUrl || ig ? `<div class="wg"><div class="wh">Dónde estamos</div>${i.address ? `<div class="wa">${esc(i.address)}</div>` : ""}${i.hours ? `<div class="wa">${esc(i.hours)}</div>` : ""}<div class="wb">${i.address || i.mapsUrl ? `<a class="wbtn" href="${mp}" target="_blank" rel="noopener">Abrir Maps</a>` : ""}${ig}</div></div>` : ""}`;
+  $("#hd").innerHTML = `${bn ? `<div class="bn" style="background-image:url('${esc(bn)}')"></div>` : ""}<div class="hi"><div class="logo">${lg}</div><div class="hx"><h1>${esc(b.name)}</h1><p>${esc(b.tagline)}</p></div></div>${(b.desc || "").trim() ? `<p class="dsc">${esc(b.desc.trim())}</p>` : ""}${bi.length ? `<div class="hg">${bi.map(u => `<img src="${esc(u)}" alt="${esc(b.name)}" loading="lazy">`).join("")}</div>` : ""}${b.arOn === false ? "" : `<div class="arn">◎ ${esc(b.arNotice ?? "Tocá cualquier producto para verlo sobre tu mesa con realidad aumentada")}</div>`}${i.address || i.mapsUrl || ig ? `<div class="wg"><div class="wh">Dónde estamos</div>${i.address ? `<div class="wa">${esc(i.address)}</div>` : ""}${i.hours ? `<div class="wa">${esc(i.hours)}</div>` : ""}<div class="wb">${i.address || i.mapsUrl ? `<a class="wbtn" href="${mp}" target="_blank" rel="noopener">Abrir Maps</a>` : ""}${ig}</div></div>` : ""}`;
   const cats = cfg.categories.map((c,ci) => ({c, ci, items: c.hide ? [] : c.items.map((it,ii) => ({it,ii})).filter(x => !x.it.hide)})).filter(x => x.items.length);
   const sl = $("#nv").scrollLeft;
   if (cfg.feat && !cfg.carousels){ cfg.carousels = [cfg.feat]; delete cfg.feat; }
